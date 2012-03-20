@@ -1,0 +1,240 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link type="text/css" href="css/ui-lightness/jquery-ui-1.8.17.custom.css" rel="stylesheet" />
+<script type="text/javascript" src="js/jquery-1.7.1.js"></script>
+<script type="text/javascript" src="js/jquery-ui-1.8.17.custom.js"></script>
+<script type="text/javascript" src="js/logic.js"></script>
+
+<script src="development-bundle/ui/jquery.ui.core.js"></script>
+<script src="development-bundle/ui/jquery.ui.widget.js"></script>
+<script src="development-bundle/ui/jquery.ui.position.js"></script>
+<style type="text/css">
+body {	font: 62.5% "Trebuchet MS", sans-serif;	margin: 50px;}
+
+.option {	padding: inherit;	margin-right: 0.5em;}
+
+.inputS {
+	margin-left: 1.3em; 
+	margin-right: 0.5em;
+	margin-bottom: 0.8em;
+}
+
+.err {	color : red;	display: block;}
+.submitInsert {	margin: 1em;}
+
+.expeditionList {
+	margin-top : 5em;
+
+}
+.expeditionList td {
+	padding : 0.2em 0.1em 0.2em 0.1em ;
+	border: 0.3em solid black;
+}
+.expeditionList td:nth-last-child(-n+1) {
+	border: none;
+	
+}
+.expeditionList th {
+	font-weight: bold;
+	text-align: left;
+}
+.expeditionList th:nth-last-child(-n+1) {
+	width: 22em;
+}
+
+.luckList {
+}
+
+.jQbutton {
+	padding: .4em 1em .4em 20px;
+	text-decoration: none;
+	position: relative;
+}
+
+.jQIbutton {
+	padding: .4em 1em .4em 1em;
+	position: relative;
+}
+.jQIbutton span.ui-icon {
+	margin: 0 5px 0 0;
+	position: absolute;
+	left: .2em;
+	top: 50%;
+	margin-top: -8px;
+}
+
+.jQbutton span.ui-icon {
+	margin: 0 5px 0 0;
+	position: absolute;
+	left: .2em;
+	top: 50%;
+	margin-top: -8px;
+}
+
+ul#icons {	margin: 0;	padding: 0;}
+
+ul#icons li {
+	margin: 2px;
+	position: relative;
+	padding: 4px 0;
+	cursor: pointer;
+	float: left;
+	list-style: none;
+}
+
+ul#icons span.ui-icon {	float: left;	margin: 0 4px;}
+</style>
+<title>Złodzieje dusz</title>
+</head>
+<body>
+	<div class="ui-widget">
+		<div class="ui-state-highlight ui-corner-all" style="margin-top: 20px; padding: 0.7em;">
+			<p>	<span class="ui-icon ui-icon-info"	style="float: left; margin-right: .3em;"></span>
+			<h1>Złodzieje dusz. beta</h1>
+		</div>
+	</div>
+	<br />
+
+	<!-- ui-dialog -->
+	<div id="addGamer" title="Dodaj mnie">
+		<p>Podaj po prostu </p>
+		<form>
+			<label for="id">ID:</label><input id="id" class="inputS"></input>
+		</form>
+		<p>reszte sam sobię znajdę :)</p>
+	</div>
+
+	<div id="tabs">
+		<ul>
+			<li><a href="#expy">Ekspedycje</a></li>
+			<li><a href="#luck">Luck</a></li>
+			<li><a href="#sprzety">Sprzęt</a></li>
+			<li><a href="#mirrory">Raporty</a></li>
+		</ul>
+		<div id="expy" style="padding: inherit;">
+			<div class="option">
+				<h3> <a href="#">Lista ekspedycji</a> </h3>
+				<div>
+				<p style="float:left;"> <a href="#" id="expListRefresh" class="jQbutton ui-state-default ui-corner-all">
+					<span class="ui-icon ui-icon-arrowrefresh-1-w"></span>Odśwież</a></p>
+				<br/>
+				<table class="expeditionList"></table>
+				</div>
+			</div>
+			<div class="option">
+				<h3> <a href="#">Dodaj ekspedycje</a> </h3>
+				 <form id="addExpedition">
+				 	<label for="you1">Ty:</label><input id="you1" class="inputS"></input> 
+				 	<br/>
+				 	<label for="when">kiedy:</label><input id="when" class="inputS"></input>
+				 	<br/>
+				 	<label for="oktorej">o której:</label><select id="oktorej" class="inputS"></select>
+				 	<br/>
+				 	<label for="where">gdzie:</label><select id="where" class="inputS"><option>wybierz lokacje</option></select>
+				 	<br/>
+				 	<button class="submitInsert">dodaj</button>
+				 </form>
+			</div>
+		</div>
+
+		<div id="luck" style="padding: inherit;">
+			<div class="option">
+				<h3><a href="#">Lista ,,rezerwacji''</a></h3>
+				<div>
+					<p style="float:left;"> <a href="#" id="luckListRefresh" class="jQbutton ui-state-default ui-corner-all">
+					<span class="ui-icon ui-icon-arrowrefresh-1-w"></span>Odśwież</a></p>
+				<br/>
+				<table class="expeditionList"></table>
+				</div>
+			</div>
+			<div class="option">
+				<h3><a href="#">Dodaj wpis</a></h3>
+				<form id="addLuck">
+					<label for="you2">Ty:</label><input id="you2" class="inputS"></input>
+					<br/>
+					<label for="from">od:</label><select id="from" class="inputS"></select> <select id="fromm"></select>
+					<label for="to">do:</label><select id="to" class="inputS"></select><select id="tom"></select> 
+				 	<br/>
+				 	<button class="submitInsert">dodaj</button>
+				 </form>
+				
+			</div>
+		</div>
+		<div id="sprzety" style="padding: inherit;">
+			<div class="option">
+				<h3> <a href="#">Szukaj sprzętu</a> </h3>
+				<div>
+				<form id="eqQuery">
+					<input id="query" class="inputS"></input>
+					<button class="submitInsert">szukaj</button>
+				</form>
+				<br/>
+				<table class="expeditionList"></table>
+				</div>
+			</div>
+			<div class="option">
+				<h3> <a href="#">Dodaj sprzęt</a> </h3>
+				 <form id="addEq">
+				 	<label for="you3">Ty:</label><input id="you3" class="inputS"></input> 
+				 	<br/>
+				 	<label for="name">nazwa:</label><input id="name" class="inputS"></input>
+				 	<br/>
+				 	<label for="type">typ:</label><select id="type" class="inputS"></select>
+				 	<br/>
+				 	<label for="tags">tagi:</label><input id="tags" class="inputS"></input>
+				 	<br/>
+				 	<button class="submitInsert">dodaj</button>
+				 </form>
+			</div>
+		</div>
+		<div id="mirrory" style="padding: inherit;">
+			<div class="option">
+				<h3> <a href="#">Lista raportów</a> </h3>
+				<div>
+				<p style="float:left;"> <a href="#" id="mirrorListRefresh" class="jQbutton ui-state-default ui-corner-all">
+					<span class="ui-icon ui-icon-arrowrefresh-1-w"></span>Odśwież</a></p>
+				<br/>
+				<table class="expeditionList"></table>
+				</div>
+			</div>
+			<div class="option">
+				<h3> <a href="#">Dodaj raport</a> </h3>
+				<form id="addRaport">
+					<input id="raport" class="inputS"></input>
+					<button class="submitInsert">dodaj</button>
+				</form>
+			</div>
+		</div>
+	</div>
+	
+	<p style="float:right;">
+		<a href="#" id="dialog_link" class="jQbutton ui-state-default ui-corner-all">
+			<span class="ui-icon ui-icon-newwin"></span>
+			Dodaj mnie
+		</a>
+	</p>
+						
+	<a href="#" id="addMem" class="jQIbutton ui-state-default ui-corner-all" title="dołącz">
+		<span class="ui-icon ui-icon-plusthick" ></span>
+	</a>
+	<a href="#" id="delMem" class="jQIbutton ui-state-default ui-corner-all" title="odejdź">
+		<span class="ui-icon ui-icon-minusthick"></span>
+	</a>
+	<a href="#" id="delExp" class="jQIbutton ui-state-default ui-corner-all"  title="usuń ekspedycje" >
+		<span class="ui-icon ui-icon-closethick"></span>
+	</a>
+	<a href="#" id="delLuck" class="jQIbutton ui-state-default ui-corner-all"  title="usuń wpis" >
+		<span class="ui-icon ui-icon-closethick"></span>
+	</a>
+	<a href="#" id="delEq" class="jQIbutton ui-state-default ui-corner-all"  title="usuń wpis" >
+		<span class="ui-icon ui-icon-closethick"></span>
+	</a>
+		<a href="#" id="delMir" class="jQIbutton ui-state-default ui-corner-all"  title="usuń raport" >
+		<span class="ui-icon ui-icon-closethick"></span>
+	</a>
+	
+	
+</body>
+</html>
